@@ -1,0 +1,20 @@
+.rx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+.rx-card { display: flex; flex-direction: column; gap: 12px; border-left: 4px solid var(--primary); }
+.rx-header { display: flex; align-items: center; gap: 12px; }
+.rx-icon { width: 40px; height: 40px; background: var(--primary-light); color: var(--primary); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.rx-header h4 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+.rx-header span { font-size: 12px; color: var(--primary); font-weight: 600; }
+.rx-date { margin-left: auto; font-size: 12px; color: var(--gray-500); white-space: nowrap; }
+.rx-diagnosis { font-size: 13px; color: var(--gray-700); padding: 8px 12px; background: var(--bg); border-radius: 8px; }
+.rx-medicines strong { font-size: 13px; display: block; margin-bottom: 6px; }
+.med-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.med-chip { padding: 3px 10px; background: var(--primary-light); color: var(--primary); border-radius: 20px; font-size: 12px; font-weight: 500; }
+.med-chip.more { background: var(--gray-100); color: var(--gray-500); }
+.rx-modal { max-width: 640px; }
+.rx-detail-header { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 16px; border-bottom: 1px solid var(--gray-100); margin-bottom: 16px; }
+.rx-detail-header h4 { font-size: 17px; font-weight: 700; }
+.rx-detail-header p { font-size: 13px; color: var(--primary); }
+.rx-detail-date { font-size: 13px; color: var(--gray-500); text-align: right; }
+.rx-section { margin-bottom: 16px; }
+.rx-section strong { font-size: 13px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px; }
+.rx-section p { font-size: 14px; color: var(--dark); line-height: 1.6; }

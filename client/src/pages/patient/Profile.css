@@ -1,0 +1,15 @@
+.profile-layout { display: grid; grid-template-columns: 260px 1fr; gap: 24px; align-items: start; }
+.profile-avatar-card { text-align: center; }
+.profile-badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.profile-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.profile-badge.blood { background: var(--danger-light); color: #991b1b; }
+.profile-badge.gender { background: var(--primary-light); color: var(--primary-dark); }
+.profile-badge.age { background: var(--success-light); color: #065f46; }
+.profile-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+.profile-value { padding: 11px 0; font-size: 14px; color: var(--dark); border-bottom: 1px solid var(--gray-100); }
+.card-section-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+.profile-details { display: flex; flex-direction: column; }
+@media (max-width: 768px) {
+  .profile-layout { grid-template-columns: 1fr; }
+  .profile-form-grid { grid-template-columns: 1fr; }
+}

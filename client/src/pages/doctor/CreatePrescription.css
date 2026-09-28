@@ -1,0 +1,13 @@
+.medicine-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .medicine-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}

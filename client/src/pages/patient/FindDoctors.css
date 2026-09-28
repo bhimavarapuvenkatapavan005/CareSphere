@@ -1,0 +1,37 @@
+.search-row { display: flex; gap: 12px; align-items: center; }
+.filters-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--gray-100); }
+
+.spec-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.spec-chip-btn {
+  padding: 6px 16px; border: 2px solid var(--gray-300); border-radius: 20px;
+  background: white; font-size: 13px; font-weight: 500; cursor: pointer;
+  color: var(--gray-700); transition: all 0.2s;
+}
+.spec-chip-btn:hover, .spec-chip-btn.active { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+
+.doctors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+
+.doctor-card { display: flex; flex-direction: column; gap: 14px; transition: transform 0.2s, box-shadow 0.2s; }
+.doctor-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+
+.doc-card-header { display: flex; gap: 14px; align-items: flex-start; }
+.doc-card-info { flex: 1; }
+.doc-card-info h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.doc-spec { display: block; font-size: 13px; color: var(--primary); font-weight: 600; margin-bottom: 2px; }
+.doc-qual { display: block; font-size: 12px; color: var(--gray-500); }
+
+.doc-card-meta { display: flex; flex-direction: column; gap: 6px; }
+.doc-meta-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--gray-500); }
+
+.doc-card-rating { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; }
+.review-count { font-size: 12px; color: var(--gray-500); font-weight: 400; }
+
+.doc-hospital { font-size: 13px; color: var(--gray-500); padding: 8px 12px; background: var(--bg); border-radius: 8px; }
+
+.doc-card-actions { display: flex; gap: 8px; margin-top: 4px; }
+.doc-card-actions .btn-cs { flex: 1; justify-content: center; }
+
+@media (max-width: 768px) {
+  .filters-row { grid-template-columns: 1fr 1fr; }
+  .doctors-grid { grid-template-columns: 1fr; }
+}

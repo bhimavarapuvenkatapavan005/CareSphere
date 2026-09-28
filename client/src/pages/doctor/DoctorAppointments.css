@@ -1,0 +1,8 @@
+.action-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.patient-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 16px; }
+.patient-info-row { display: flex; flex-direction: column; padding: 10px 0; border-bottom: 1px solid var(--gray-100); }
+.patient-info-row span { font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+.patient-info-row strong { font-size: 14px; }
+.patient-health-section { padding: 12px; background: var(--bg); border-radius: var(--radius); margin-bottom: 10px; }
+.patient-health-section strong { font-size: 13px; display: block; margin-bottom: 4px; }
+.patient-health-section p { font-size: 13px; color: var(--gray-500); }

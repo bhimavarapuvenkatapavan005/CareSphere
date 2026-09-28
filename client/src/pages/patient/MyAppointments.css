@@ -1,0 +1,32 @@
+.tab-count { font-size: 11px; margin-left: 4px; opacity: 0.7; }
+.appts-list { display: flex; flex-direction: column; gap: 16px; }
+.appt-card { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+.appt-card-left { display: flex; gap: 16px; align-items: flex-start; flex: 1; }
+.appt-card-left h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.appt-spec { font-size: 13px; color: var(--primary); font-weight: 600; margin-bottom: 6px; }
+.appt-datetime { display: flex; gap: 14px; font-size: 13px; color: var(--gray-500); margin-bottom: 4px; }
+.appt-datetime span { display: flex; align-items: center; gap: 4px; }
+.appt-reason { font-size: 13px; color: var(--gray-500); font-style: italic; margin-top: 4px; }
+.appt-card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; flex-shrink: 0; }
+.appt-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+
+.current-appt-info { background: var(--warning-light); padding: 12px; border-radius: var(--radius); margin-bottom: 16px; font-size: 14px; }
+
+.slots-grid-sm { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.slot-btn-sm {
+  padding: 8px 4px; border: 2px solid var(--gray-300); border-radius: 8px;
+  background: white; font-size: 12px; cursor: pointer; transition: all 0.2s;
+}
+.slot-btn-sm:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); }
+.slot-btn-sm.selected { border-color: var(--primary); background: var(--primary); color: white; }
+.slot-btn-sm.booked { background: var(--gray-100); color: var(--gray-300); cursor: not-allowed; border-color: transparent; }
+
+.star-picker { display: flex; gap: 8px; }
+.star-pick { font-size: 32px; background: none; border: none; cursor: pointer; color: var(--gray-300); transition: color 0.15s; }
+.star-pick.active { color: #fbbf24; }
+
+@media (max-width: 640px) {
+  .appt-card { flex-direction: column; }
+  .appt-card-right { align-items: flex-start; }
+  .appt-actions { justify-content: flex-start; }
+}
