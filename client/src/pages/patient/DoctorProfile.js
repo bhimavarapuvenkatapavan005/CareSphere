@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { MapPin, Clock, DollarSign, Star, Globe, Building2, Calendar } from 'lucide-react';
+import { MapPin, Clock, Star, Globe, Building2, Calendar } from 'lucide-react';
 import { doctorAPI } from '../../services/api';
 import DashboardLayout from '../../layouts/DashboardLayout';
 import './DoctorProfile.css';
@@ -40,7 +40,7 @@ export default function DoctorProfile() {
               <span><Clock size={14}/> {doctor.experience} yrs experience</span>
               {doctor.address && <span><MapPin size={14}/> {doctor.address}</span>}
               {doctor.hospital && <span><Building2 size={14}/> {doctor.hospital}</span>}
-              <span><DollarSign size={14}/> ${doctor.fees} / visit</span>
+              <span>₹{doctor.fees} / visit</span>
             </div>
             <div className="dp-rating-row">
               <div className="stars">{renderStars(doctor.rating)}</div>
@@ -80,7 +80,7 @@ export default function DoctorProfile() {
               <div className="detail-row"><span>Qualification</span><strong>{doctor.qualification}</strong></div>
               <div className="detail-row"><span>Experience</span><strong>{doctor.experience} years</strong></div>
               <div className="detail-row"><span>Hospital/Clinic</span><strong>{doctor.hospital || '—'}</strong></div>
-              <div className="detail-row"><span>Consultation Fee</span><strong>${doctor.fees}</strong></div>
+              <div className="detail-row"><span>Consultation Fee</span><strong>₹{doctor.fees}</strong></div>
             </div>
           </div>
         </div>

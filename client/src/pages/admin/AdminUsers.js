@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { ToggleLeft, ToggleRight, Eye, X, UserPlus } from 'lucide-react';
+import { ToggleLeft, ToggleRight, Eye, X, UserPlus, Trash2 } from 'lucide-react';
 import { adminAPI } from '../../services/api';
 import DashboardLayout from '../../layouts/DashboardLayout';
 
@@ -14,6 +14,8 @@ export default function AdminUsers() {
   const [showCreate, setShowCreate] = useState(false);
   const [form, setForm]           = useState(emptyForm);
   const [creating, setCreating]   = useState(false);
+
+  const [confirmDelete, setConfirmDelete] = useState(null); // holds user to delete
 
   useEffect(() => {
     adminAPI.getUsers().then(r => setUsers(r.data)).finally(() => setLoading(false));
@@ -42,6 +44,17 @@ export default function AdminUsers() {
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to create account');
     } finally { setCreating(false); }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await adminAPI.deleteUser(confirmDelete._id);
+      setUsers(prev => prev.filter(u => u._id !== confirmDelete._id));
+      toast.success(`${confirmDelete.name} deleted successfully`);
+      setConfirmDelete(null);
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Delete failed');
+    }
   };
 
   const filtered = users.filter(u =>
@@ -96,6 +109,9 @@ export default function AdminUsers() {
                         <button className="btn-cs btn-ghost btn-sm" onClick={() => setSelected(u)}><Eye size={14} /></button>
                         <button className={`btn-cs btn-sm ${u.isActive ? 'btn-danger' : 'btn-success'}`} onClick={() => handleToggle(u._id)}>
                           {u.isActive ? <><ToggleLeft size={14} /> Disable</> : <><ToggleRight size={14} /> Enable</>}
+                        </button>
+                        <button className="btn-cs btn-danger btn-sm" onClick={() => setConfirmDelete(u)}>
+                          <Trash2 size={14} />
                         </button>
                       </div>
                     </td>
@@ -174,6 +190,27 @@ export default function AdminUsers() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {/* Delete Confirmation Modal */}
+      {confirmDelete && (
+        <div className="cs-modal-overlay" onClick={() => setConfirmDelete(null)}>
+          <div className="cs-modal" style={{ maxWidth: 400 }} onClick={e => e.stopPropagation()}>
+            <div className="cs-modal-header">
+              <h3 className="cs-modal-title">Delete User</h3>
+              <button className="cs-modal-close" onClick={() => setConfirmDelete(null)}><X size={20} /></button>
+            </div>
+            <p style={{ fontSize: 14, color: 'var(--gray-600)', marginBottom: 8 }}>
+              Are you sure you want to permanently delete <strong>{confirmDelete.name}</strong>?
+            </p>
+            <p style={{ fontSize: 13, color: 'var(--error)', marginBottom: 20 }}>
+              ⚠️ This action cannot be undone. All associated data will be removed.
+            </p>
+            <div style={{ display: 'flex', gap: 12 }}>
+              <button className="btn-cs btn-ghost" style={{ flex: 1 }} onClick={() => setConfirmDelete(null)}>Cancel</button>
+              <button className="btn-cs btn-danger" style={{ flex: 1 }} onClick={handleDelete}>Delete</button>
+            </div>
           </div>
         </div>
       )}

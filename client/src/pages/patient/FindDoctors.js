@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Search, MapPin, Star, Clock, DollarSign, Filter } from 'lucide-react';
+import { Search, MapPin, Star, Clock, Filter } from 'lucide-react';
 import { doctorAPI } from '../../services/api';
 import DashboardLayout from '../../layouts/DashboardLayout';
 import './FindDoctors.css';
@@ -65,7 +65,7 @@ export default function FindDoctors() {
             </select>
             <input className="cs-input" type="number" placeholder="Min experience (yrs)"
               value={filters.minExp} onChange={e => setFilters({...filters, minExp: e.target.value})} />
-            <input className="cs-input" type="number" placeholder="Max fee ($)"
+            <input className="cs-input" type="number" placeholder="Max fee (₹)"
               value={filters.maxFee} onChange={e => setFilters({...filters, maxFee: e.target.value})} />
             <select className="cs-input cs-select" value={filters.rating}
               onChange={e => setFilters({...filters, rating: e.target.value})}>
@@ -119,7 +119,7 @@ export default function FindDoctors() {
               <div className="doc-card-meta">
                 <div className="doc-meta-item"><Clock size={14} /> {doc.experience} yrs exp</div>
                 {doc.address && <div className="doc-meta-item"><MapPin size={14} /> {doc.address}</div>}
-                <div className="doc-meta-item"><DollarSign size={14} /> ${doc.fees} / visit</div>
+                <div className="doc-meta-item">₹{doc.fees} / visit</div>
               </div>
               <div className="doc-card-rating">
                 {renderStars(doc.rating)}

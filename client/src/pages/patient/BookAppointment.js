@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { Calendar, Clock, Upload, DollarSign, MapPin } from 'lucide-react';
+import { Calendar, Clock, Upload, MapPin } from 'lucide-react';
 import { doctorAPI, appointmentAPI } from '../../services/api';
 import DashboardLayout from '../../layouts/DashboardLayout';
 import './BookAppointment.css';
@@ -78,7 +78,7 @@ export default function BookAppointment() {
             <div className="doc-summary-meta">
               <div className="meta-row"><Clock size={14} /> {doctor.experience} years experience</div>
               {doctor.address && <div className="meta-row"><MapPin size={14} /> {doctor.address}</div>}
-              <div className="meta-row fee-row"><DollarSign size={14} /> <strong>${doctor.fees}</strong> consultation fee</div>
+              <div className="meta-row fee-row"><strong>₹{doctor.fees}</strong> consultation fee</div>
             </div>
             {doctor.availability?.days?.length > 0 && (
               <div className="avail-days">
@@ -147,7 +147,7 @@ export default function BookAppointment() {
                 <div className="summary-row"><span>Doctor</span><span>Dr. {doctor.userId?.name}</span></div>
                 <div className="summary-row"><span>Date</span><span>{date}</span></div>
                 <div className="summary-row"><span>Time</span><span>{selectedSlot}</span></div>
-                <div className="summary-row"><span>Fee</span><span>${doctor.fees}</span></div>
+                <div className="summary-row"><span>Fee</span><span>₹{doctor.fees}</span></div>
               </div>
             )}
 

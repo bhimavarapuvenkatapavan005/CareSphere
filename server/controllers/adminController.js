@@ -27,6 +27,20 @@ const getUsers = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    if (user.role === 'admin') return res.status(403).json({ message: 'Cannot delete admin accounts' });
+    // delete related doctor profile if exists
+    await Doctor.deleteOne({ userId: user._id });
+    await User.findByIdAndDelete(user._id);
+    res.json({ message: 'User deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 const toggleUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -195,6 +209,6 @@ const createDoctorAccount = async (req, res) => {
 };
 
 module.exports = {
-  createUser, getUsers, toggleUser, getDoctors, approveDoctor, rejectDoctor,
+  createUser, getUsers, toggleUser, deleteUser, getDoctors, approveDoctor, rejectDoctor,
   getAppointments, getAnalytics, createDoctorAccount,
 };

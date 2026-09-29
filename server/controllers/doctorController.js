@@ -116,7 +116,8 @@ const getSlots = async (req, res) => {
     const { date } = req.query;
     if (!date) return res.status(400).json({ message: 'Date is required' });
 
-    const dayName = new Date(date).toLocaleDateString('en-US', { weekday: 'long' });
+    const [y, m, d] = date.split('-').map(Number);
+    const dayName = new Date(y, m - 1, d).toLocaleDateString('en-US', { weekday: 'long' });
     if (!doctor.availability.days.includes(dayName))
       return res.json({ slots: [], message: 'Doctor not available on this day' });
 

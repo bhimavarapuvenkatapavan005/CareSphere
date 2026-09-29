@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { CheckCircle, XCircle, Eye, X, UserPlus } from 'lucide-react';
+import { CheckCircle, XCircle, Eye, X, UserPlus, Trash2 } from 'lucide-react';
 import { adminAPI } from '../../services/api';
 import DashboardLayout from '../../layouts/DashboardLayout';
 
@@ -23,6 +23,8 @@ export default function AdminDoctors() {
   const [showCreate, setShowCreate] = useState(false);
   const [form, setForm]             = useState(emptyForm);
   const [creating, setCreating]     = useState(false);
+
+  const [confirmDelete, setConfirmDelete] = useState(null);
 
   const loadDoctors = () => {
     setLoading(true);
@@ -76,6 +78,17 @@ export default function AdminDoctors() {
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to create doctor account');
     } finally { setCreating(false); }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await adminAPI.deleteUser(confirmDelete.userId?._id);
+      setDoctors(prev => prev.filter(d => d._id !== confirmDelete._id));
+      toast.success(`Dr. ${confirmDelete.userId?.name} deleted successfully`);
+      setConfirmDelete(null);
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Delete failed');
+    }
   };
 
   const filtered = tab === 'all' ? doctors : doctors.filter(d => d.approvalStatus === tab);
@@ -165,6 +178,9 @@ export default function AdminDoctors() {
                             <CheckCircle size={14} /> Approve
                           </button>
                         )}
+                        <button className="btn-cs btn-danger btn-sm" onClick={() => setConfirmDelete(d)}>
+                          <Trash2 size={14} />
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -331,6 +347,27 @@ export default function AdminDoctors() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {/* Delete Confirmation Modal */}
+      {confirmDelete && (
+        <div className="cs-modal-overlay" onClick={() => setConfirmDelete(null)}>
+          <div className="cs-modal" style={{ maxWidth: 400 }} onClick={e => e.stopPropagation()}>
+            <div className="cs-modal-header">
+              <h3 className="cs-modal-title">Delete Doctor</h3>
+              <button className="cs-modal-close" onClick={() => setConfirmDelete(null)}><X size={20} /></button>
+            </div>
+            <p style={{ fontSize: 14, color: 'var(--gray-600)', marginBottom: 8 }}>
+              Are you sure you want to permanently delete <strong>Dr. {confirmDelete.userId?.name}</strong>?
+            </p>
+            <p style={{ fontSize: 13, color: 'var(--error)', marginBottom: 20 }}>
+              ⚠️ This will remove their user account and doctor profile permanently.
+            </p>
+            <div style={{ display: 'flex', gap: 12 }}>
+              <button className="btn-cs btn-ghost" style={{ flex: 1 }} onClick={() => setConfirmDelete(null)}>Cancel</button>
+              <button className="btn-cs btn-danger" style={{ flex: 1 }} onClick={handleDelete}>Delete</button>
+            </div>
           </div>
         </div>
       )}

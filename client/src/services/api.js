@@ -87,6 +87,7 @@ export const adminAPI = {
   createUser: data => API.post('/admin/users/create', data),
   getUsers: () => API.get('/admin/users'),
   toggleUser: id => API.put(`/admin/users/${id}/toggle`),
+  deleteUser: id => API.delete(`/admin/users/${id}`),
   getDoctors: () => API.get('/admin/doctors'),
   createDoctor: data => API.post('/admin/doctors/create', data),
   approveDoctor: id => API.put(`/admin/doctors/${id}/approve`),

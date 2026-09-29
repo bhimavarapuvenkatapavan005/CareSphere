@@ -27,6 +27,7 @@ import DoctorAvailability from './pages/doctor/DoctorAvailability';
 import DoctorPrescriptions from './pages/doctor/DoctorPrescriptions';
 import DoctorProfilePage from './pages/doctor/DoctorProfilePage';
 import DoctorNotifications from './pages/doctor/DoctorNotifications';
+import DoctorPatients from './pages/doctor/DoctorPatients';
 
 // Admin
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -64,6 +65,7 @@ export default function App() {
           <Route path="/doctor/availability" element={<PrivateRoute roles={['doctor']}><DoctorAvailability /></PrivateRoute>} />
           <Route path="/doctor/prescriptions" element={<PrivateRoute roles={['doctor']}><DoctorPrescriptions /></PrivateRoute>} />
           <Route path="/doctor/profile" element={<PrivateRoute roles={['doctor']}><DoctorProfilePage /></PrivateRoute>} />
+          <Route path="/doctor/patients" element={<PrivateRoute roles={['doctor']}><DoctorPatients /></PrivateRoute>} />
           <Route path="/doctor/notifications" element={<PrivateRoute roles={['doctor']}><DoctorNotifications /></PrivateRoute>} />
 
           {/* Admin */}

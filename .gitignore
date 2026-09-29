@@ -25,3 +25,6 @@ pnpm-debug.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Temporary token files
+server/temp_token.json
